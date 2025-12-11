@@ -36,7 +36,6 @@ def load_and_prep_data():
 # --- Helper: Fetch Live Weather ---
 def get_live_weather():
     if API_KEY == "fe9989bf293345cb172b17490a704651":
-        st.sidebar.error("⚠️ Please insert your OpenWeatherMap API Key in the code.")
         return None
     
     try:
