@@ -82,14 +82,22 @@ if df is not None:
     if 'inputs' not in st.session_state:
         st.session_state.inputs = {col: float(df[col].mean()) for col in feature_cols}
 
-    # Button to fetch live weather
+# Button to fetch live weather
     if st.sidebar.button(f"Fetch Live Weather Data"):
         live_weather = get_live_weather()
         if live_weather:
+            # Update session state with all 3 parameters
             st.session_state.inputs["Temperature_C"] = live_weather["Temperature_C"]
             st.session_state.inputs["Humidity_pct"] = live_weather["Humidity_pct"]
             st.session_state.inputs["Rainfall_mm"] = live_weather["Rainfall_mm"]
-            st.sidebar.success(f"Success! Temp: {live_weather['Temperature_C']}°C, Rain: {live_weather['Rainfall_mm']}mm")
+            
+            # --- UPDATED SUCCESS MESSAGE ---
+            st.sidebar.success(f"""
+            ✅ Data Updated!
+            - 🌡️ Temp: {live_weather['Temperature_C']} °C
+            - 💧 Humidity: {live_weather['Humidity_pct']} %
+            - 🌧️ Rain: {live_weather['Rainfall_mm']} mm
+            """)
         else:
             st.sidebar.warning("Could not fetch live data. Using averages.")
 
