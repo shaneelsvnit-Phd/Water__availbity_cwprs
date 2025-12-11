@@ -100,17 +100,34 @@ if df is not None:
     with col1:
         st.subheader("🎛️ Prediction Parameters")
         st.write("Adjust parameters manually or use Live Feed above.")
-        
-        # Create input form with sliders
+
+# Create input form with sliders
         current_inputs = {}
         for col in feature_cols:
             min_v = float(df[col].min())
             max_v = float(df[col].max())
-            default_v = st.session_state.inputs[col]
+            default_v = float(st.session_state.inputs[col])
             
             # Ensure default is within bounds
             default_v = max(min_v, min(default_v, max_v))
             
+            # --- FIX STARTS HERE ---
+            # Determine step size: small for pH/Rain, larger for Usage/Flow
+            if max_v < 20: # Likely pH, Turbidity, etc.
+                step_size = 0.1
+            else: # Likely Usage, Flow, etc.
+                step_size = 1.0
+                
+            # We explicitly pass 'step' as a float to match min_v and max_v types
+            current_inputs[col] = st.slider(
+                label=f"{col}", 
+                min_value=min_v, 
+                max_value=max_v, 
+                value=default_v, 
+                step=step_size
+            )
+            # --- FIX ENDS HERE ---
+        
             current_inputs[col] = st.slider(f"{col}", min_v, max_v, default_v)
 
         predict_btn = st.button("Run Prediction Model")
