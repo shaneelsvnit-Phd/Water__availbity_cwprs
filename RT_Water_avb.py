@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 
 # --- Page Config ---
-st.set_page_config(page_title="HIF Smart Water Management (Live)", layout="wide")
+st.set_page_config(page_title="CWPRS HIF Smart Water Management (Live)", layout="wide")
 
 # --- Configuration ---
 # UPDATED: Your OpenWeatherMap API Key
@@ -17,9 +17,9 @@ CITY_NAME = "Pune"
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather?"
 
 # --- Title & Context ---
-st.title("💧 Hybrid Intelligence Framework (HIF) - Pune Region")
+st.title("💧 CWPRS Hybrid Intelligence Framework (HIF) - Pune Region")
 st.markdown(f"""
-**AI Model Developer Scientist Dashboard** This system implements the **Five-Layer Architecture** for Smart Water Management[cite: 28].
+**By Shaneel S Sao, AI Model Developer in Scientist Cadre Dashboard** This system implements the **Five-Layer Architecture** for Smart Water Management[cite: 28].
 It predicts surface/ground water availability by fusing **Historical Data** with **Live Weather API Data** for **{CITY_NAME}**.
 """)
 
